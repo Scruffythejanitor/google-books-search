@@ -1,22 +1,24 @@
 const express = require("express");
 const path = require("path");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3001;
 const app = express();
+
+const GoogleBook = require('./models/books')
 
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+mongoose.connect(process.env.PORT ? "mongodb://user:password123@ds149874.mlab.com:49874/heroku_98nsf817" : "mongodb://localhost/google-books", { useNewUrlParser: true })
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-mongoose.connect(process.env.PORT || "mongodb://user:password123@ds149874.mlab.com:49874/heroku_98nsf817")
+require('./routes/index')(app)
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
+
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
