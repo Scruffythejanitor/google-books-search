@@ -4,7 +4,7 @@ const db = require("../models")
 
 module.exports = function (app){
 
-    app.get('/books', function (request, response) {
+    app.get('/saved', function (request, response) {
         // response.send('The Holy Hand Grenade Of Antioch');
         db.GoogleBook
           .find({})
@@ -13,4 +13,5 @@ module.exports = function (app){
           });
       });
 
+    //   app.post("/save", (req))
 }
