@@ -49,8 +49,9 @@ class App extends Component {
             </form>
             <div>
               {this.state.books.map((book)=>(
-                <div>
-                  {book.volumeInfo.title}
+                <div className="card">
+                  <div className="card-body">Title: {book.volumeInfo.title}</div>
+                  <div className="card-body">Author(s): {book.volumeInfo.authors.join(', ')}</div>
                 </div>
               ))}
             </div>
