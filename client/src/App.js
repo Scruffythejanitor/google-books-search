@@ -79,10 +79,9 @@ class App extends Component {
                 <p className="card-text">{book.volumeInfo.description}</p>
               </div>
               <div class="card-footer">
-                {/* <small class="text-muted">Last updated 3 mins ago</small> */}
-                <form method="POST" action=".routes/api-routes/save">
+                <Link to="/savebook">
                   <button type="submit" className="btn btn-success">Save Book</button>
-                </form>
+                </Link>
               </div>
             </div>
 
