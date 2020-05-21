@@ -29,6 +29,27 @@ class App extends Component {
       })
   }
 
+  saveBook = (book) => {
+    axios({
+      method: "post",
+      url: "/save",
+      data: book
+      //^ or can be body if doesnt work
+    })
+      .then(
+        console.log
+      )
+      .catch(
+        console.log
+      )
+  }
+
+  handleSaved = () => {
+    axios("/saved")
+    .then(console.log)
+    .catch(console.log)
+  }
+
   render() {
     return (
 
@@ -44,7 +65,7 @@ class App extends Component {
           >
             Search
           </button>
-          <button className="btn btn-lg btn-outline-secondary m-5">
+          <button className="btn btn-lg btn-outline-secondary m-5" onClick={this.handleSaved}>
             Saved
           </button>
           <div className="container collapse" id="searchCollapse">
@@ -77,11 +98,10 @@ class App extends Component {
               <div className="card-body">
                 <h5 className="card-title">{book.volumeInfo.title}</h5>
                 <p className="card-text">{book.volumeInfo.description}</p>
+                <p className="card-text">{book.volumeInfo.authors}</p>
               </div>
               <div class="card-footer">
-                <Link to="/savebook">
-                  <button type="submit" className="btn btn-success">Save Book</button>
-                </Link>
+                <button type="submit" className="btn btn-success" onClick={() => this.saveBook(book)}>Save Book</button>
               </div>
             </div>
 

@@ -2,6 +2,7 @@ const cheerio = require("cheerio")
 const axios = require("axios")
 const db = require("../models")
 
+
 module.exports = function (app){
 
     app.get('/saved', function (request, response) {
@@ -13,7 +14,15 @@ module.exports = function (app){
           });
       });
 
-      app.post("/save", function (req, res){
-        res.send(saved)
+      app.post("/save", function ({body}, res){
+        // console.log(body);
+        
+        const {volumeInfo} = body
+
+        db.GoogleBook.create({
+          name: volumeInfo.title,
+          
+        })
+        .then(response => {res.send(response)})
       })
 }
