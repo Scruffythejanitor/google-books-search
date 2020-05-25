@@ -26,6 +26,7 @@ class App extends Component {
         console.log(result);
 
         this.setState({ books: result.data.items })
+        
       })
   }
 
@@ -48,6 +49,17 @@ class App extends Component {
     axios("/saved")
     .then(console.log)
     .catch(console.log)
+    this.pageSwitch()
+  }
+
+  pageSwitch = () => {
+    if (this.handleSaved){
+      console.log("SAVED");
+      
+    } else {
+      console.log("BOOKS");
+      
+    }
   }
 
   render() {
@@ -91,14 +103,17 @@ class App extends Component {
           </div>
         </div>
         <div className="card-columns m-4">
+          
           {this.state.books.map((book) => (
 
             <div className="card shadow">
+              <a href={book.volumeInfo.infoLink} target="_blank" rel="noopener noreferrer">
               <img className="card-img-top " src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
+              </a>
               <div className="card-body">
-                <h5 className="card-title">{book.volumeInfo.title}</h5>
-                <p className="card-text">{book.volumeInfo.description}</p>
-                <p className="card-text">{book.volumeInfo.authors}</p>
+                <h5 className="card-title font-weight-bolder">{book.volumeInfo.title}</h5>
+                <p className="card-text"><small>{book.volumeInfo.description}</small></p>
+                <p className="card-text font-weight-bolder">{book.volumeInfo.authors.join(', ')}</p>
               </div>
               <div class="card-footer">
                 <button type="submit" className="btn btn-success" onClick={() => this.saveBook(book)}>Save Book</button>

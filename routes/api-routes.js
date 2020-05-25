@@ -18,9 +18,15 @@ module.exports = function (app){
         // console.log(body);
         
         const {volumeInfo} = body
+        
+        
 
         db.GoogleBook.create({
           name: volumeInfo.title,
+          authors: volumeInfo.authors,
+          description: volumeInfo.description,
+          image: volumeInfo.imageLinks.thumbnail,
+          link: volumeInfo.infoLink,
           
         })
         .then(response => {res.send(response)})
